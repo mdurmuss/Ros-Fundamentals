@@ -1,12 +1,15 @@
 #!/usr/bin/env python
 
+NODE_NAME = "battery"
+SERVICE_NAME ="/set_led"
+
 import rospy
 from my_robot_msgs.srv import SetLed
 
 def set_led(battery_state):
-	rospy.wait_for_service("/set_led") # wait until the service is available
+	rospy.wait_for_service(SERVICE_NAME) # wait until the service is available
 	try:
-		service = rospy.ServiceProxy("/set_led", SetLed) # take the service with its name
+		service = rospy.ServiceProxy(SERVICE_NAME, SetLed) # take the service with its name
 		state = 0 # state will be 0 by default
 		if battery_state == 'empty': # if battery is empty then state will be 1
 			state = 1
@@ -17,7 +20,7 @@ def set_led(battery_state):
 
 
 if __name__ == '__main__':
-	rospy.init_node('battery') #initialize the client_node
+	rospy.init_node(NODE_NAME) #initialize the client_node
 
 	battery_state = "full" # battery state will be full by default
 

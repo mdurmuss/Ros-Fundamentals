@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+NODE_NAME = "numberCounter"
+SUB_TOPIC_NAME = "/number"
+PUB_TOPIC_NAME = "/number_count"
+
 import rospy
 from std_msgs.msg import Int64
 # import related libs
@@ -16,13 +20,13 @@ def myfunction(message):
     pub.publish(new_msg)
     
 if __name__ == "__main__":
-    rospy.init_node("numberCounter")
-    subscriber = rospy.Subscriber("/number",Int64,myfunction) # create a subscriber
+    rospy.init_node(NODE_NAME)
+    subscriber = rospy.Subscriber(SUB_TOPIC_NAME,Int64,myfunction) # create a subscriber
     # here there is a function(myfunction)
     # this function will be called when that topic will send a message.
     # after taking that message that function will show it.
     # and will add it to counter and publish it.
-    pub = rospy.Publisher("/number_count",Int64,queue_size=10) # create a publisher
+    pub = rospy.Publisher(PUB_TOPIC_NAME,Int64,queue_size=10) # create a publisher
     rate = rospy.Rate(2)
     
     rospy.spin()

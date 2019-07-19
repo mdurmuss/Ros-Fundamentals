@@ -1,5 +1,8 @@
 #!/usr/bin/env python
-
+NODE_NAME = "Subscriber_and_Publisher"
+SUB_TOPIC_NAME = "/NumberPublisher"
+PUB_TOPIC_NAME = "/CountPublisher"
+SERVICE_NAME = "/reset_number_count"
 import rospy
 from std_msgs.msg import Int64
 from std_srvs.srv import SetBool
@@ -28,13 +31,13 @@ def handler_set_bool(req): # when service takes a request
 
 
 if __name__ == "__main__":
-    rospy.init_node("Subscriber_and_Publisher")
+    rospy.init_node(NODE_NAME)
     
-    sub = rospy.Subscriber("/NumberPublisher",Int64,callback_function)
+    sub = rospy.Subscriber(SUB_TOPIC_NAME,Int64,callback_function)
     #subscriber created, take message to callback_function
-    pub = rospy.Publisher("/CountPublisher",Int64,queue_size=10)
+    pub = rospy.Publisher(PUB_TOPIC_NAME,Int64,queue_size=10)
     #publisher created
-    srv = rospy.Service("/reset_number_count",SetBool,handler_set_bool)
+    srv = rospy.Service(SERVICE_NAME,SetBool,handler_set_bool)
     #service created
     rospy.loginfo("Count Service server has been started!")
 

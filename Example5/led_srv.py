@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+NODE_NAME = "led_panel"
+SERVICE_NAME = "/set_led"
 import rospy
 from my_robot_msgs.srv import SetLed
 
@@ -22,10 +24,10 @@ def callback_set_led(req): # it takes the request, request include a led_number 
 	return True
 
 if __name__ == '__main__':
-	rospy.init_node('led_panel') # initialize the server node
+	rospy.init_node(NODE_NAME) # initialize the server node
 
 
-	server = rospy.Service("/set_led", SetLed, callback_set_led) # create the server
+	server = rospy.Service(SERVICE_NAME, SetLed, callback_set_led) # create the server
 	# if server gets any request then callback_set_led function will be called
 
 	rate = rospy.Rate(10)
