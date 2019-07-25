@@ -5,12 +5,16 @@ from my_robot_msgs.msg import  HardwareTest
 from my_robot_msgs.srv import Test
 #related libs imported
 
+NODE_NAME = "SERVER"
+SUB_TOPIC_NAME = "/status"
+SERVICE_NAME = "/takeAction"
+
 # OOP will be used in this example
 class Drone:
 
     def __init__(self):
-        self.sub = rospy.Subscriber("/status",HardwareTest,self.callback_HardwareTest)
-        self.srv = rospy.Service("/takeAction",Test,self.test_handler)
+        self.sub = rospy.Subscriber(SUB_TOPIC_NAME,HardwareTest,self.callback_HardwareTest)
+        self.srv = rospy.Service(SERVICE_NAME,Test,self.test_handler)
         self.location = []
     # when an object is created, subscriber and server will be created also.
     # subscriber takes message and calls callback_HardwareTest function.
@@ -36,7 +40,7 @@ class Drone:
         return False
     
 if __name__ == "__main__":
-    rospy.init_node("SERVER")
+    rospy.init_node(NODE_NAME)
     #node created
     Drone()
     rospy.spin()
