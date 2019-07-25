@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Author : Mustafa Durmuş [mustafa@hummingdrone.co]
-# Company: Hummingdrone Inc. [hummingdrone.co]
+# Author : Mustafa Durmuş 
 
 import rospy
 from std_msgs.msg import Int64

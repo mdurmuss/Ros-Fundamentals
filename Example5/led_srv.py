@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# Author : Mustafa Durmuş
 
 NODE_NAME = "led_panel"
 SERVICE_NAME = "/set_led"
