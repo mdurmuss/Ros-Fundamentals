@@ -1,13 +1,19 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# Author : Mustafa Durmuş
 
 import rospy
 from std_msgs.msg import String
 
+NODE_NAME = "robot_news_radio_transmitter"
+PUB_TOPIC_NAME = "/robot_news_radio"
+
+
 if __name__ == '__main__':
 
-	rospy.init_node('robot_news_radio_transmitter', anonymous=True)
+	rospy.init_node(NODE_NAME, anonymous=True)
 
-	pub = rospy.Publisher("/robot_news_radio", String, queue_size=10)
+	pub = rospy.Publisher(PUB_TOPIC_NAME, String, queue_size=10)
 	# create a publisher
 	# topic name : /robot_news_radio
 	# topic message type : String
