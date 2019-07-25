@@ -1,14 +1,24 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# Author : Mustafa Durmuş [mustafa@hummingdrone.co]
+# Company: Hummingdrone Inc. [hummingdrone.co]
+
+import rospy
+from std_msgs.msg import Int64
+from std_srvs.srv import SetBool
+
 NODE_NAME = "Subscriber_and_Publisher"
 SUB_TOPIC_NAME = "/NumberPublisher"
 PUB_TOPIC_NAME = "/CountPublisher"
 SERVICE_NAME = "/reset_number_count"
-import rospy
-from std_msgs.msg import Int64
-from std_srvs.srv import SetBool
-counter =0
+counter = 0
+
 
 def callback_function(msg):
+    """
+    runs when subscriber takes a message.
+    counts of all messages and publishes.
+    """
     rospy.loginfo("Message has arrived! -->"+str(msg))
     global counter
     counter += msg.data
@@ -17,29 +27,37 @@ def callback_function(msg):
     new_msg.data = counter
     pub.publish(new_msg)
 
-def handler_set_bool(req): # when service takes a request
-    # we can 
-    # talk with server
-    # ask a question
-    # get an answer
-    # that is the difference between topics and servers
+
+def handler_set_bool(req):
+    """
+    runs when service is called by a client.
+    takes a request and returns a response.
+    req : request of the client.
+    returns True or False according to the request data
+    """
     global counter
-    if req.data == True: # if request is True
-        counter = 0 # counter will be 0
-        return [True,"Counter is arranged to 0!"]
-    return [False,"Counter still counting!"]
+    if req.data is True:
+        counter = 0
+        return [True, "Counter is arranged to 0!"]
+    return [False, "Counter still counting!"]
 
 
-if __name__ == "__main__":
+def subscriber_and_publisher():
+    """
+    creates a node,subscriber,publisher and service.
+    """
     rospy.init_node(NODE_NAME)
-    
-    sub = rospy.Subscriber(SUB_TOPIC_NAME,Int64,callback_function)
-    #subscriber created, take message to callback_function
-    pub = rospy.Publisher(PUB_TOPIC_NAME,Int64,queue_size=10)
-    #publisher created
-    srv = rospy.Service(SERVICE_NAME,SetBool,handler_set_bool)
-    #service created
+    sub = rospy.Subscriber(SUB_TOPIC_NAME, Int64, callback_function)
+    # subscriber created, take message to callback_function
+    pub = rospy.Publisher(PUB_TOPIC_NAME, Int64, queue_size=10)
+    # publisher created
+    srv = rospy.Service(SERVICE_NAME, SetBool, handler_set_bool)
+    # service created
     rospy.loginfo("Count Service server has been started!")
 
     rate = rospy.Rate(2)
     rospy.spin()
+
+
+if __name__ == "__main__":
+    subscriber_and_publisher()

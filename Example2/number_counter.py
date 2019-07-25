@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# Author : Mustafa Durmuş [mustafa@hummingdrone.co]
+# Company: Hummingdrone Inc. [hummingdrone.co]
 
 import rospy
 from std_msgs.msg import Int64
@@ -10,11 +13,12 @@ PUB_TOPIC_NAME = "/number_count"
 counter = 0
 
 
-def myfunction(message):
-    # here there is a function(myfunction)
-    # this function will be called when that topic will send a message.
-    # after taking that message that function will show it.
-    # and will add it to counter and publish it.
+def my_function(message):
+    """
+    gets the message topic sent and will publish its new message.
+    message
+    message : Message that taken from the subscribed topic.
+    """
     rospy.loginfo("Message has just received!")
     rospy.loginfo(message)
     global counter
@@ -29,7 +33,7 @@ if __name__ == "__main__":
     rospy.init_node(NODE_NAME)
     # that node is a subscriber to "/number" topic
     # and a publisher of "/number_count" topic.
-    subscriber = rospy.Subscriber(SUB_TOPIC_NAME, Int64, myfunction)
+    subscriber = rospy.Subscriber(SUB_TOPIC_NAME, Int64, my_function)
     # create a subscriber
     pub = rospy.Publisher(PUB_TOPIC_NAME, Int64, queue_size=10)
     # create a publisher

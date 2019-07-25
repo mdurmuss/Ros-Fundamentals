@@ -1,13 +1,22 @@
 #!/usr/bin/env python
-NODE_NAME = "PublisherNode"
-TOPIC_NAME ="/NumberPublisher"
+# -*- coding: utf-8 -*-
+# Author : Mustafa Durmuş [mustafa@hummingdrone.co]
+# Company: Hummingdrone Inc. [hummingdrone.co]
+
 import rospy
 from std_msgs.msg import Int64
 
-if __name__ == "__main__":
+NODE_NAME = "PublisherNode"
+TOPIC_NAME = "/NumberPublisher"
 
-    rospy.init_node(NODE_NAME) # node created
-    pub = rospy.Publisher(TOPIC_NAME,Int64,queue_size=10) #publisher created
+
+def publisher():
+    """
+    creates a node and a publisher to publish a message type of Int64.
+    """
+    rospy.init_node(NODE_NAME)  # node created
+    pub = rospy.Publisher(TOPIC_NAME, Int64, queue_size=10)
+    # publisher created
     rospy.loginfo("Message is publishing")
     rate = rospy.Rate(2)
 
@@ -19,3 +28,7 @@ if __name__ == "__main__":
         rate.sleep()
 
     rospy.loginfo("Publisher node has stopped!")
+
+
+if __name__ == "__main__":
+    publisher()
