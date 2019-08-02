@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Author : Mustafa Durmuş 
+# Author : Mustafa Durmuş
 
 import rospy
 from rospy_tutorials.srv import AddTwoInts
@@ -11,10 +11,9 @@ SERVICE_NAME = "/add_two_ints"
 
 def client():
     """
-    this function tries to connect a service and
+    Tries to connect a service and
     sends a message and takes a response.
     """
-    rospy.init_node(NODE_NAME)
     rospy.wait_for_service(SERVICE_NAME)  # wait until the service is available
 
     # after service is available, lets do our job
@@ -32,6 +31,7 @@ def client():
 
 if __name__ == "__main__":
     try:
+        rospy.init_node(NODE_NAME)
         client()
     except rospy.ServiceException as e:
         rospy.logwarn("Service failed because of : "+str(e))

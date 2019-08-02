@@ -18,14 +18,13 @@ class NumberCounter:
     """
 
     def __init__(self):
-
         self.counter = 0
         self.sub = rospy.Subscriber(
             SUB_TOPIC_NAME, Int64, self.callback_number)
         self.pub = rospy.Publisher(PUB_TOPIC_NAME, Int64, queue_size=10)
 
         self.reset_service = rospy.Service(
-            SERVICE_NAME, Int64, SetBool, self.callback_reset_number)
+            SERVICE_NAME, SetBool, self.callback_reset_number)
 
     def callback_number(self, msg):
         self.counter += msg.data

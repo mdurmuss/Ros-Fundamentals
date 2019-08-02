@@ -16,9 +16,8 @@ if __name__ == "__main__":
     # number is the topic name.
     # Int64 is the message type of topic
     rate = rospy.Rate(2)
-
+    message = Int64()
     while not rospy.is_shutdown():
-        message = Int64()
         message.data = 10
         # INT64 message type has a data variable.
         publisher.publish(message)

@@ -41,22 +41,16 @@ def handler_set_bool(req):
     return [False, "Counter still counting!"]
 
 
-def subscriber_and_publisher():
-    """
-    creates a node,subscriber,publisher and service.
-    """
+if __name__ == "__main__":
+
     rospy.init_node(NODE_NAME)
-    sub = rospy.Subscriber(SUB_TOPIC_NAME, Int64, callback_function)
-    # subscriber created, take message to callback_function
     pub = rospy.Publisher(PUB_TOPIC_NAME, Int64, queue_size=10)
     # publisher created
+    sub = rospy.Subscriber(SUB_TOPIC_NAME, Int64, callback_function)
+    # subscriber created, take message to callback_function
     srv = rospy.Service(SERVICE_NAME, SetBool, handler_set_bool)
     # service created
     rospy.loginfo("Count Service server has been started!")
 
     rate = rospy.Rate(2)
     rospy.spin()
-
-
-if __name__ == "__main__":
-    subscriber_and_publisher()

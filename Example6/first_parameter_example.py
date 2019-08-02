@@ -23,7 +23,6 @@ def parameter():
     publish_frequency = rospy.get_param(PARAM_NAMES[0])
     # getting the frequency parameter from ros
     rate = rospy.Rate(2)
-
     number = rospy.get_param(PARAM_NAMES[1])
     # create another parameter
 

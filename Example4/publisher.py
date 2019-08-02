@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Author : Mustafa Durmuş 
+# Author : Mustafa Durmuş
 
 import rospy
 from std_msgs.msg import Int64
@@ -11,16 +11,13 @@ TOPIC_NAME = "/NumberPublisher"
 
 def publisher():
     """
-    creates a node and a publisher to publish a message type of Int64.
+    creates a message type of Int64 and publishes.
     """
-    rospy.init_node(NODE_NAME)  # node created
-    pub = rospy.Publisher(TOPIC_NAME, Int64, queue_size=10)
     # publisher created
     rospy.loginfo("Message is publishing")
     rate = rospy.Rate(2)
 
     while not rospy.is_shutdown():
-        msg = Int64()
         msg.data = 7
         pub.publish(msg)
         # publisher sending the message
@@ -30,4 +27,7 @@ def publisher():
 
 
 if __name__ == "__main__":
+    rospy.init_node(NODE_NAME)  # node created
+    pub = rospy.Publisher(TOPIC_NAME, Int64, queue_size=10)
+    msg = Int64()
     publisher()
