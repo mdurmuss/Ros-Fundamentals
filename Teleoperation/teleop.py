@@ -13,7 +13,7 @@ else:
     import termios  # for unix terminal controls
 
 NODE_NAME = "teleop_node"
-PUB_TOPIC_NAME = "/teleop"
+PUB_TOPIC_NAME = "/YOURTOPICNAME"
 LIN_VEL_STEP_SIZE = 0.5
 ANG_VEL_STEP_SIZE = 0.1
 
@@ -71,7 +71,7 @@ def publish_my_twist():
     while(1):
         target_lin_vel = 0.0
         target_ang_vel = 0.0
-        key = getKey()  # the key user push
+        key = getKey()  # the pushed key
 
         if key in ['w', 'x', 'a', 'd']:  # if key is a direction key (w,x,d,a)
             if key == 'w':
@@ -80,7 +80,7 @@ def publish_my_twist():
                 target_lin_vel = -LIN_VEL_STEP_SIZE
             elif key == 'd':
                 target_ang_vel = ANG_VEL_STEP_SIZE
-            else:  # if key is 'a'
+            else:
                 target_ang_vel = -ANG_VEL_STEP_SIZE
             status = status + 1
 
